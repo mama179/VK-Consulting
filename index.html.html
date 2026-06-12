@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VK Consulting — Transit & Dédouanement | Douala, Cameroun</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rouge: #D0021B;
+    --rouge-fonce: #8B0000;
+    --rouge-vif: #FF1A2E;
+    --noir: #0A0A0A;
+    --noir-doux: #111111;
+    --gris-fonce: #1C1C1C;
+    --gris: #2E2E2E;
+    --gris-clair: #888;
+    --blanc: #FFFFFF;
+    --creme: #F5F0EB;
+    --or: #C9A84C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--noir);
+    color: var(--blanc);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 999;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(208,2,27,0.3);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    color: var(--blanc);
+    letter-spacing: 2px;
+  }
+  .nav-logo span { color: var(--rouge); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--gris-clair);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--rouge); }
+  .nav-cta {
+    background: var(--rouge);
+    color: var(--blanc) !important;
+    padding: 9px 22px;
+    border-radius: 2px;
+    font-weight: 700 !important;
+  }
+  .nav-cta:hover { background: var(--rouge-vif) !important; color: var(--blanc) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 60px 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #0A0A0A 0%, #1a0305 50%, #0A0A0A 100%);
+  }
+  .hero-lines {
+    position: absolute; inset: 0; overflow: hidden;
+  }
+  .hero-lines::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: 55%;
+    width: 800px; height: 800px;
+    background: radial-gradient(ellipse, rgba(208,2,27,0.18) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  .hero-lines::after {
+    content: '';
+    position: absolute;
+    top: 20%; right: -10%;
+    width: 3px; height: 60%;
+    background: linear-gradient(to bottom, transparent, var(--rouge), transparent);
+    animation: slideDown 4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:0.8} 50%{transform:scale(1.1);opacity:1} }
+  @keyframes slideDown { 0%,100%{transform:translateY(-20px);opacity:0.4} 50%{transform:translateY(20px);opacity:1} }
+
+  .diagonal-stripe {
+    position: absolute;
+    top: 0; right: 0;
+    width: 45%; height: 100%;
+    background: linear-gradient(to bottom-left, rgba(208,2,27,0.07), transparent);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(208,2,27,0.15);
+    border: 1px solid rgba(208,2,27,0.4);
+    border-radius: 30px;
+    padding: 6px 18px;
+    margin-bottom: 32px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    animation: fadeInDown 0.8s ease forwards;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--rouge); border-radius: 50%;
+    animation: blink 1.5s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5.2rem);
+    line-height: 1.05;
+    font-weight: 900;
+    margin-bottom: 12px;
+    animation: fadeInUp 0.9s 0.2s ease both;
+  }
+  .hero-title .accent { color: var(--rouge); }
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem;
+    color: var(--or);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeInUp 0.9s 0.35s ease both;
+  }
+  .hero-desc {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 540px;
+    margin-bottom: 44px;
+    animation: fadeInUp 0.9s 0.5s ease both;
+  }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeInUp 0.9s 0.65s ease both; }
+  .btn-primary {
+    background: var(--rouge);
+    color: var(--blanc);
+    padding: 14px 34px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 12px 100%);
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--rouge-vif); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--blanc);
+    padding: 14px 34px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--rouge); color: var(--rouge); }
+
+  .hero-stats {
+    position: absolute; bottom: 60px; right: 60px;
+    display: flex; gap: 48px;
+    z-index: 2;
+    animation: fadeInUp 0.9s 0.8s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.4rem; font-weight: 700;
+    color: var(--rouge);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; color: var(--gris-clair); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px;
+  }
+  .section-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--rouge); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.1;
+    font-weight: 700;
+  }
+  .section-title span { color: var(--rouge); }
+
+  /* ── MÉTIER ── */
+  #metier { background: var(--gris-fonce); }
+  .metier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+  .metier-text p { color: rgba(255,255,255,0.7); line-height: 1.9; margin-bottom: 20px; font-size: 1rem; }
+  .metier-schema {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(208,2,27,0.3);
+    border: 1px solid rgba(208,2,27,0.3);
+  }
+  .schema-cell {
+    background: var(--gris-fonce);
+    padding: 24px;
+    transition: background 0.3s;
+  }
+  .schema-cell:hover { background: rgba(208,2,27,0.08); }
+  .schema-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .schema-cell h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--rouge); margin-bottom: 6px;
+  }
+  .schema-cell p { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--noir); }
+  .services-intro { max-width: 600px; margin-bottom: 60px; }
+  .services-intro p { color: rgba(255,255,255,0.6); margin-top: 16px; line-height: 1.8; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; }
+  .service-card {
+    background: var(--gris-fonce);
+    padding: 36px 32px;
+    border-left: 3px solid transparent;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(208,2,27,0.06), transparent);
+    opacity: 0; transition: opacity 0.35s;
+  }
+  .service-card:hover { border-left-color: var(--rouge); transform: translateX(4px); }
+  .service-card:hover::before { opacity: 1; }
+  .service-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 3rem; font-weight: 700;
+    color: rgba(208,2,27,0.12);
+    line-height: 1;
+    margin-bottom: 8px;
+    transition: color 0.35s;
+  }
+  .service-card:hover .service-num { color: rgba(208,2,27,0.25); }
+  .service-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.15rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--blanc); margin-bottom: 12px;
+  }
+  .service-card p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+  .service-tag {
+    display: inline-block;
+    margin-top: 16px;
+    background: rgba(208,2,27,0.15);
+    color: var(--rouge);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  /* ── PROCESSUS ── */
+  #processus { background: var(--gris-fonce); }
+  .processus-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 60px; position: relative; }
+  .processus-steps::before {
+    content: '';
+    position: absolute;
+    top: 36px; left: 10%; right: 10%;
+    height: 2px;
+    background: linear-gradient(to right, var(--rouge), rgba(208,2,27,0.2));
+  }
+  .step { text-align: center; padding: 0 12px; position: relative; }
+  .step-circle {
+    width: 72px; height: 72px;
+    background: var(--rouge);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    position: relative; z-index: 1;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .step:hover .step-circle { transform: scale(1.1); box-shadow: 0 0 30px rgba(208,2,27,0.5); }
+  .step-icon { font-size: 1.6rem; }
+  .step h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.88rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--blanc); margin-bottom: 8px;
+  }
+  .step p { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* ── AVANTAGES ── */
+  #avantages { background: var(--noir); }
+  .avantages-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 60px; }
+  .avantage {
+    background: var(--gris-fonce);
+    padding: 40px;
+    display: flex; gap: 24px;
+    align-items: flex-start;
+    transition: background 0.3s;
+  }
+  .avantage:hover { background: rgba(208,2,27,0.07); }
+  .avantage-icon {
+    font-size: 2rem; min-width: 48px; text-align: center;
+  }
+  .avantage h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--blanc); margin-bottom: 8px;
+  }
+  .avantage p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+  /* ── DOUALA CONTEXT ── */
+  #contexte {
+    background: linear-gradient(135deg, var(--rouge-fonce), #3D0000);
+    position: relative; overflow: hidden;
+  }
+  #contexte::before {
+    content: 'DOUALA';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 18vw; font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .contexte-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 60px; position: relative; z-index: 1; }
+  .ctx-card {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 36px;
+    backdrop-filter: blur(8px);
+  }
+  .ctx-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--or); margin-bottom: 12px;
+  }
+  .ctx-card p { font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.8; }
+  .ctx-stat {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 3rem; font-weight: 700;
+    color: var(--blanc); line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--gris-fonce); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; }
+  .contact-info h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--rouge); margin-bottom: 6px;
+  }
+  .contact-item { margin-bottom: 28px; }
+  .contact-item p { color: rgba(255,255,255,0.75); font-size: 1.05rem; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-field {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .form-field label {
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gris-clair);
+  }
+  .form-field input, .form-field select, .form-field textarea {
+    background: var(--gris);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    padding: 12px 16px;
+    color: var(--blanc);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.3s;
+    outline: none;
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+    border-color: var(--rouge);
+  }
+  .form-field textarea { resize: vertical; min-height: 100px; }
+  .form-field select option { background: var(--gris); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--noir);
+    border-top: 1px solid rgba(208,2,27,0.2);
+    padding: 48px 60px 32px;
+  }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+  .footer-brand .nav-logo { font-size: 1.8rem; margin-bottom: 12px; }
+  .footer-brand p { color: rgba(255,255,255,0.4); font-size: 0.85rem; max-width: 300px; line-height: 1.7; }
+  .footer-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--rouge); margin-top: 8px;
+  }
+  .footer-links h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--rouge); margin-bottom: 16px;
+  }
+  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a { color: rgba(255,255,255,0.45); font-size: 0.85rem; text-decoration: none; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--blanc); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+  /* ── BANNER ── */
+  .cta-banner {
+    background: var(--rouge);
+    padding: 48px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cta-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+  }
+  .cta-banner p { color: rgba(255,255,255,0.75); margin-top: 6px; font-size: 0.95rem; }
+  .btn-white {
+    background: var(--blanc);
+    color: var(--rouge);
+    padding: 14px 36px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%);
+    transition: opacity 0.3s;
+  }
+  .btn-white:hover { opacity: 0.9; }
+
+  /* ── DIVIDER ── */
+  .red-line { height: 3px; background: linear-gradient(to right, var(--rouge), var(--rouge-fonce), transparent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 70px 24px; }
+    #hero { padding: 100px 24px 70px; }
+    .hero-stats { position: static; margin-top: 40px; justify-content: center; flex-wrap: wrap; gap: 24px; }
+    .metier-grid, .contact-grid, .avantages-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contexte-grid { grid-template-columns: 1fr; }
+    .processus-steps { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .processus-steps::before { display: none; }
+    .cta-banner { flex-direction: column; gap: 24px; text-align: center; }
+    .footer-top { flex-direction: column; gap: 32px; }
+    footer { padding: 40px 24px 24px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VK<span> Consulting</span></div>
+  <ul class="nav-links">
+    <li><a href="#metier">Le Métier</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#processus">Processus</a></li>
+    <li><a href="#avantages">Pourquoi Nous</a></li>
+    <li><a href="#contexte">Douala</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="diagonal-stripe"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Douala, Cameroun · Transit & Commerce International</div>
+    <h1 class="hero-title">
+      Expert en<br><span class="accent">Transit &</span><br>Dédouanement
+    </h1>
+    <p class="hero-sub">The Power of Speed</p>
+    <p class="hero-desc">
+      VK Consulting accompagne les importateurs, exportateurs et entreprises dans toutes leurs 
+      démarches douanières à Douala — le premier port d'Afrique centrale. 
+      Rapidité, conformité, expertise.
+    </p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">Nos Services</a>
+      <a href="#contact" class="btn-outline">Nous Contacter</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Ans d'expérience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Dossiers traités</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">48h</div>
+      <div class="stat-label">Délai moyen</div>
+    </div>
+  </div>
+</section>
+<div class="red-line"></div>
+
+<!-- LE MÉTIER DE TRANSITAIRE -->
+<section id="metier">
+  <div class="section-label">Comprendre</div>
+  <h2 class="section-title">Le Métier de <span>Transitaire</span></h2>
+
+  <div class="metier-grid">
+    <div class="metier-text">
+      <p>
+        Le <strong>transitaire</strong> (ou commissionnaire en douane) est le professionnel qui assure 
+        le passage des marchandises à travers les frontières douanières. À Douala, premier port de 
+        la sous-région CEMAC, ce rôle est stratégique pour toute entreprise qui importe ou exporte.
+      </p>
+      <p>
+        Il est l'intermédiaire légal et logistique entre l'importateur/exportateur, la douane 
+        camerounaise (DGD), les armateurs, les transporteurs et les organismes de contrôle 
+        (CAMCIS, BIVAC, GUCE).
+      </p>
+      <p>
+        Son travail va de la <strong>collecte des documents</strong> à la <strong>livraison finale</strong> 
+        de la marchandise, en passant par la validation des déclarations, le paiement des droits 
+        et taxes, et le suivi en temps réel des opérations.
+      </p>
+    </div>
+
+    <div class="metier-schema">
+      <div class="schema-cell">
+        <div class="schema-icon">🚢</div>
+        <h4>Arrivée au Port</h4>
+        <p>Réception des documents d'expédition (connaissement, facture, colisage)</p>
+      </div>
+      <div class="schema-cell">
+        <div class="schema-icon">📋</div>
+        <h4>Déclaration DAU</h4>
+        <p>Établissement du Document Administratif Unique dans CAMCIS</p>
+      </div>
+      <div class="schema-cell">
+        <div class="schema-icon">✅</div>
+        <h4>Dédouanement</h4>
+        <p>Validation par la douane, paiement des droits, levée de la marchandise</p>
+      </div>
+      <div class="schema-cell">
+        <div class="schema-icon">🚛</div>
+        <h4>Livraison</h4>
+        <p>Transport jusqu'au destinataire final ou entrepôt désigné</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-intro">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">Nos <span>Services</span></h2>
+    <p>Une gamme complète de prestations couvrant toutes les étapes du transit et de la logistique douanière à Douala et dans la région CEMAC.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <h3>Formation CAMCIS</h3>
+      <p>Maîtrisez la plateforme informatique de dédouanement du Cameroun. Formation complète pour déclarants, transitaires et agents de douane.</p>
+      <span class="service-tag">Formation</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <h3>Formation e-Force du GUCE</h3>
+      <p>Utilisation du Guichet Unique des Opérations du Commerce Extérieur. Maîtrisez les procédures dématérialisées d'importation/exportation.</p>
+      <span class="service-tag">Formation</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <h3>Validation DI & Dédouanement</h3>
+      <p>Validation de la Déclaration d'Importation et accompagnement complet pour le dédouanement de vos marchandises au port de Douala.</p>
+      <span class="service-tag">Douane</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <h3>Validation DAU & Suivi</h3>
+      <p>Établissement et validation du Document Administratif Unique. Suivi en temps réel de vos dossiers jusqu'à la mainlevée.</p>
+      <span class="service-tag">Douane</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <h3>Émission RK, CAH, PR</h3>
+      <p>Émission des Reçus de Khâzine, Certificats d'Acquit à Higé et Permis de Régularisation pour vos opérations douanières.</p>
+      <span class="service-tag">Documents</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <h3>Émission FDEC & TI</h3>
+      <p>Gestion des Feuilles De Enlèvement Contrôlé et des Titres d'Importation pour vos marchandises sous régimes particuliers.</p>
+      <span class="service-tag">Documents</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">07</div>
+      <h3>Enregistrement DSV</h3>
+      <p>Enregistrement des Déclarations Sommaires de Valeur pour les opérations d'importation et conformité aux normes douanières.</p>
+      <span class="service-tag">Conformité</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">08</div>
+      <h3>Création BESC</h3>
+      <p>Élaboration des Bordereaux Électroniques de Suivi des Cargaisons — obligatoires pour toute importation au Cameroun.</p>
+      <span class="service-tag">Logistique</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">09</div>
+      <h3>Demandes en Ligne (T.E.L.)</h3>
+      <p>Traitement de toutes vos demandes en ligne sur les plateformes douanières et commerciales : TEL, attestations, certificats.</p>
+      <span class="service-tag">Digital</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">10</div>
+      <h3>Enrôlement en Ligne</h3>
+      <p>Accompagnement pour l'enrôlement et l'enregistrement des entreprises et opérateurs sur les systèmes douaniers camerounais.</p>
+      <span class="service-tag">Enregistrement</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSUS -->
+<section id="processus">
+  <div class="section-label">Comment ça marche</div>
+  <h2 class="section-title">Notre <span>Processus</span></h2>
+
+  <div class="processus-steps">
+    <div class="step">
+      <div class="step-circle"><span class="step-icon">📞</span></div>
+      <h4>Contact Initial</h4>
+      <p>Prise en charge rapide de votre dossier et analyse des besoins spécifiques</p>
+    </div>
+    <div class="step">
+      <div class="step-circle"><span class="step-icon">📁</span></div>
+      <h4>Collecte Docs</h4>
+      <p>Rassemblement de tous les documents nécessaires à l'opération</p>
+    </div>
+    <div class="step">
+      <div class="step-circle"><span class="step-icon">🖥️</span></div>
+      <h4>Saisie CAMCIS</h4>
+      <p>Déclaration et validation sur la plateforme douanière officielle</p>
+    </div>
+    <div class="step">
+      <div class="step-circle"><span class="step-icon">✅</span></div>
+      <h4>Dédouanement</h4>
+      <p>Paiement des droits, vérification et obtention de la mainlevée</p>
+    </div>
+    <div class="step">
+      <div class="step-circle"><span class="step-icon">🚚</span></div>
+      <h4>Livraison</h4>
+      <p>Enlèvement et acheminement de la marchandise à destination</p>
+    </div>
+  </div>
+</section>
+
+<!-- AVANTAGES -->
+<section id="avantages">
+  <div class="section-label">Pourquoi Nous</div>
+  <h2 class="section-title">Les <span>Avantages</span> VK Consulting</h2>
+
+  <div class="avantages-grid">
+    <div class="avantage">
+      <div class="avantage-icon">⚡</div>
+      <div>
+        <h3>Rapidité d'Exécution</h3>
+        <p>Grâce à notre maîtrise des plateformes CAMCIS et GUCE, nous réduisons les délais de dédouanement à moins de 48h pour les dossiers standards, vous évitant des frais de surestaries coûteux.</p>
+      </div>
+    </div>
+    <div class="avantage">
+      <div class="avantage-icon">🎓</div>
+      <div>
+        <h3>Expertise Reconnue</h3>
+        <p>Plus de 15 ans d'expérience dans le transit camerounais. Notre connaissance approfondie de la réglementation douanière CEMAC garantit la conformité totale de vos opérations.</p>
+      </div>
+    </div>
+    <div class="avantage">
+      <div class="avantage-icon">🔍</div>
+      <div>
+        <h3>Suivi Transparent</h3>
+        <p>Vous êtes informé à chaque étape de votre dossier. Pas de surprise, pas de délai caché : une communication claire et régulière tout au long du processus.</p>
+      </div>
+    </div>
+    <div class="avantage">
+      <div class="avantage-icon">💼</div>
+      <div>
+        <h3>Service Complet</h3>
+        <p>De la formation des équipes jusqu'au dédouanement final, VK Consulting couvre l'intégralité de la chaîne logistique douanière en un seul point de contact.</p>
+      </div>
+    </div>
+    <div class="avantage">
+      <div class="avantage-icon">🤝</div>
+      <div>
+        <h3>Relations Institutionnelles</h3>
+        <p>Des liens solides avec la DGD, le GUCE, la BIVAC et les principaux armateurs du port de Douala facilitent le traitement de vos dossiers complexes.</p>
+      </div>
+    </div>
+    <div class="avantage">
+      <div class="avantage-icon">📱</div>
+      <div>
+        <h3>Accessibilité Permanente</h3>
+        <p>Disponible par téléphone et WhatsApp pour répondre à vos urgences. Le port de Douala ne s'arrête jamais — nous non plus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOUALA CONTEXTE -->
+<section id="contexte">
+  <div class="section-label">Notre Terrain</div>
+  <h2 class="section-title">Douala &amp; <span>le Commerce Extérieur</span></h2>
+
+  <div class="contexte-grid">
+    <div class="ctx-card">
+      <div class="ctx-stat">80%</div>
+      <h3>Trafic CEMAC</h3>
+      <p>Le Port Autonome de Douala traite plus de 80% du commerce extérieur de la sous-région d'Afrique centrale, en faisant la plaque tournante incontournable pour le Cameroun, le Tchad, la RCA, le Congo et le Gabon.</p>
+    </div>
+    <div class="ctx-card">
+      <div class="ctx-stat">GUCE</div>
+      <h3>Guichet Unique</h3>
+      <p>Le GUCE (Guichet Unique des Opérations du Commerce Extérieur) centralise toutes les formalités d'import/export. VK Consulting maîtrise parfaitement cette plateforme pour accélérer vos procédures.</p>
+    </div>
+    <div class="ctx-card">
+      <div class="ctx-stat">CAMCIS</div>
+      <h3>Système Douanier</h3>
+      <p>CAMCIS est le système informatique de la douane camerounaise pour la gestion des déclarations. Notre expertise sur cet outil garantit des déclarations conformes et sans rejet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div>
+    <h2>Votre marchandise au port ? Agissons maintenant.</h2>
+    <p>Chaque heure compte. Évitez les surestaries et les pénalités douanières.</p>
+  </div>
+  <a href="#contact" class="btn-white">Dossier Express</a>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Nous Joindre</div>
+  <h2 class="section-title">Contactez <span>VK Consulting</span></h2>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-item">
+        <h3>📍 Adresse</h3>
+        <p>Douala, Cameroun<br>Zone portuaire & centre-ville</p>
+      </div>
+      <div class="contact-item">
+        <h3>📧 Email</h3>
+        <p>kouepouvive@yahoo.fr</p>
+      </div>
+      <div class="contact-item">
+        <h3>📞 Téléphone</h3>
+        <p>+237 698 127 438</p>
+      </div>
+      <div class="contact-item">
+        <h3>💬 WhatsApp</h3>
+        <p>+237 675 215 454</p>
+      </div>
+      <div class="contact-item">
+        <h3>🕐 Disponibilité</h3>
+        <p>Lundi – Samedi : 7h00 – 19h00<br>Urgences : 24h/24</p>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-field">
+          <label>Prénom & Nom</label>
+          <input type="text" placeholder="Jean Mbarga">
+        </div>
+        <div class="form-field">
+          <label>Entreprise</label>
+          <input type="text" placeholder="Votre société">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Téléphone</label>
+          <input type="tel" placeholder="+237 6XX XXX XXX">
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="email@exemple.cm">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Service souhaité</label>
+        <select>
+          <option value="">Sélectionnez un service</option>
+          <option>Dédouanement / Validation DI</option>
+          <option>Validation DAU & Suivi</option>
+          <option>Formation CAMCIS</option>
+          <option>Formation e-Force GUCE</option>
+          <option>Création BESC</option>
+          <option>Enrôlement en ligne</option>
+          <option>Autre demande</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Décrivez votre besoin</label>
+        <textarea placeholder="Type de marchandise, origine, urgence, questions..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="align-self:flex-start">Envoyer la Demande</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">VK<span> Consulting</span></div>
+      <p>Expert en transit et dédouanement au Cameroun. Votre partenaire de confiance pour toutes vos opérations douanières au port de Douala.</p>
+      <div class="footer-tagline">The Power of Speed</div>
+    </div>
+    <div class="footer-links">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Formation CAMCIS</a></li>
+        <li><a href="#services">Validation DAU</a></li>
+        <li><a href="#services">Dédouanement</a></li>
+        <li><a href="#services">Création BESC</a></li>
+        <li><a href="#services">Enrôlement</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#metier">Le Métier</a></li>
+        <li><a href="#processus">Processus</a></li>
+        <li><a href="#avantages">Pourquoi Nous</a></li>
+        <li><a href="#contexte">Douala & CEMAC</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Contact Direct</h4>
+      <ul>
+        <li><a href="mailto:kouepouvive@yahoo.fr">kouepouvive@yahoo.fr</a></li>
+        <li><a href="tel:+237698127438">+237 698 127 438</a></li>
+        <li><a href="tel:+237675215454">+237 675 215 454 (WhatsApp)</a></li>
+        <li><a href="#">Douala, Cameroun</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 VK Consulting — Tous droits réservés</p>
+    <p style="color:rgba(208,2,27,0.6); font-size:0.75rem; letter-spacing:1px;">DOUALA · CAMEROUN · CEMAC</p>
+  </div>
+</footer>
+
+</body>
+</html>
